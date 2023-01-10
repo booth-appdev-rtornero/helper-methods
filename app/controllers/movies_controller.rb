@@ -23,10 +23,10 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new
-    @movie.title = params.fetch(:movie).fetch(:title)
-    @movie.description = params.fetch(:movie).fetch(:description)
-
+    movie_attributes = params.require(:movie).permit(:title, :description, :director_id)
+    
+    @movie = Movie.new(movie_attributes)
+    
     if @movie.valid?
       @movie.save
       redirect_to movies_url, notice: "Movie created successfully."
@@ -46,6 +46,7 @@ class MoviesController < ApplicationController
 
     movie.title = params.fetch(:title)
     movie.description = params.fetch(:description)
+    movie.director_id = params.fetch(:director_id)
 
     if movie.valid?
       movie.save
