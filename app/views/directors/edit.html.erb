@@ -4,21 +4,21 @@
   <p style="color: red;"><%= message %></p>
 <% end %>
 
-<%= form_with(url: director_path(@director), method: :patch) do %>
+<%= form_with(model: @director, method: :patch) do |form| %>
   <div>
     
-    <%= label_tag :name %>
+    <%= form.label :name %>
 
-    <%= text_field_tag :name, @director.name %>
+    <%= form.text_field :name %>
 
   </div>
 
   <div>
-    <%= label_tag :bio %>
+    <%= form.label :bio %>
 
-    <%= text_area_tag :bio, @director.bio, rows: 3 %>
+    <%= form.text_area :bio, rows: 3 %>
   </div>
 
-  <%= button_tag "Update director" %>
+  <%= form.button %>
 
 <% end %>
